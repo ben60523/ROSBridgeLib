@@ -19,10 +19,10 @@ namespace ROSBridgeLib {
 														   0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 			public PoseWithCovarianceMsg(JSONNode msg) {
-				_pose = new PoseMsg(msg["pose"]);
+				_pose = new PoseMsg(msg["pose"]["pose"]);
 				// Treat covariance
-				for (int i = 0; i < msg["covariance"].Count; i++ ) {
-					_covariance[i] = double.Parse(msg["covariance"][i]);
+				for (int i = 0; i < msg["pose"]["covariance"].Count; i++ ) {
+					_covariance[i] = double.Parse(msg["pose"]["covariance"][i]);
 				}
 			}
 			

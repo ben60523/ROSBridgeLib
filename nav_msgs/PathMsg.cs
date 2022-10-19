@@ -16,7 +16,7 @@ namespace ROSBridgeLib {
 	namespace nav_msgs {
 		public class PathMsg : ROSBridgeMsg {
 			public HeaderMsg _header;
-			public List<PoseStampedMsg> _poses;
+			public List<PoseStampedMsg> _poses = new List<PoseStampedMsg>();
 			
 			public PathMsg(JSONNode msg) {
 				_header = new HeaderMsg(msg["header"]);

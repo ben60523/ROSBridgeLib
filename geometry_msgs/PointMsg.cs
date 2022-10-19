@@ -43,6 +43,10 @@ namespace ROSBridgeLib {
 			public float GetZ() {
 				return _z;
 			}
+
+			public Vector3 GetVector3() {
+				return new Vector3(_x, _y, _z);
+			}
 			
 			public override string ToString() {
 				return "geometry_msgs/Point [x=" + _x + ",  y=" + _y + ", z=" + _z + "]";
