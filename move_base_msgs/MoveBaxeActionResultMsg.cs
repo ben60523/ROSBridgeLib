@@ -8,33 +8,55 @@ namespace ROSBridgeLib
     {
         class MoveBaseActionResultMsg : ROSBridgeMsg
         {
-            private HeaderMsg _header;
-            private GoalStatusMsg _status;
-            private MoveBaseResultMsg _result;
+            private HeaderMsg header;
+            private GoalStatusMsg status;
+            private MoveBaseResultMsg result;
+
+            public MoveBaseActionResultMsg(JSONNode msg)
+            {
+                header = new HeaderMsg(msg["header"]);
+                status = new GoalStatusMsg(msg["status"]);
+                result = new MoveBaseResultMsg(msg["result"]);
+            }
+
+            public MoveBaseActionResultMsg(HeaderMsg _header, GoalStatusMsg _status, MoveBaseResultMsg _result)
+            {
+                header = _header;
+                status = _status;
+                result = _result;
+            }
 
             public static string GetMessageType()
             {
                 return "move_base_msgs/MoveBaseActionResult";
             }
 
-            public MoveBaseActionResultMsg(JSONNode msg)
+            public override string ToString()
             {
-                _header = new HeaderMsg(msg["header"]);
-                _status = new GoalStatusMsg(msg["status"]);
-                _result = new MoveBaseResultMsg(msg["result"]);
+                return "move_base_msgs/MoveBaseActionResult [header=" + header.ToString() + 
+                                                          ", status=" + status.ToString() + 
+                                                          ", result=" + result.ToString() + "]";
             }
+
+            public override string ToYAMLString()
+            {
+                return "{\"header\": " + header.ToYAMLString() + 
+                       ", \"status\": " + status.ToYAMLString() + 
+                       ", \"result\": " + result.ToYAMLString() + "}";
+            }
+
             public int GetResultStatus()
             {
-                return (int)_status.GetStatus();
+                return (int)status.GetStatus();
             }
             public string GetResultStatusDescription()
             {
-                return _status.GetStatus().ToString();
+                return status.GetStatus().ToString();
             }
 
             public StatusType GetResultStatusEnum()
             {
-                return _status.GetStatus();
+                return status.GetStatus();
             }
         }
     }

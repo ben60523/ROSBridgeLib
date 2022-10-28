@@ -8,14 +8,21 @@ namespace ROSBridgeLib
     {
         public class GoalStatusMsg : ROSBridgeMsg
         {
-            private GoalIDMsg _goal_id;
-            private int _status;
-            private string _text;
+            private GoalIDMsg goal_id;
+            private int status;
+            private string text;
             public GoalStatusMsg(JSONNode msg)
             {
-                _goal_id = new GoalIDMsg(msg["goal_id"]);
-                _status = int.Parse(msg["status"]);
-                _text = msg["text"];
+                goal_id = new GoalIDMsg(msg["goal_id"]);
+                status = int.Parse(msg["status"]);
+                text = msg["text"];
+            }
+
+            public GoalStatusMsg(GoalIDMsg _goal_id, int _status, string _text)
+            {
+                goal_id = _goal_id;
+                status = _status;
+                text = _text;
             }
 
             public static string GetMessageType()
@@ -23,9 +30,19 @@ namespace ROSBridgeLib
                 return "actionlib_msgs/GoalStatus";
             }
 
+            public override string ToString()
+            {
+                return "actionlib_msgs/GoalStatus [goal_id=" + goal_id.ToString() + ", status=" + status.ToString() + ", text=" + text;
+            }
+
+            public override string ToYAMLString()
+            {
+                return "{\"goal_id\": " + goal_id.ToYAMLString() + ", \"status\": " + status.ToString() + ", \"text\": " + text + "}";
+            }
+
             public StatusType GetStatus()
             {
-                return (StatusType)_status;
+                return (StatusType)status;
             }
         }
     }

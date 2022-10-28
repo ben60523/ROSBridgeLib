@@ -14,15 +14,32 @@ namespace ROSBridgeLib
                 target_pose = new PoseStampedMsg(msg["target_pose"]);
             }
 
+            public MoveBaseGoalMsg(PoseStampedMsg _target_pose)
+            {
+                target_pose = _target_pose;
+            }
+
             public static string GetMessageType()
             {
                 return "move_base_msgs/MoveBaseGoal";
+            }
+
+            public override string ToString()
+            {
+                return "move_base_msgs/MoveBaseGoal [target_pose=" + target_pose.ToString();
+            }
+
+
+            public override string ToYAMLString()
+            {
+                return "{\"target_pose\":" + target_pose.ToYAMLString() + "}";
             }
 
             public PoseStampedMsg GetTargetPose()
             {
                 return target_pose;
             }
+
         }
     }
 }
