@@ -12,8 +12,8 @@ using SimpleJSON;
 namespace ROSBridgeLib {
 	namespace geometry_msgs {
 		public class PoseMsg : ROSBridgeMsg {
-			public PointMsg _position;
-			public QuaternionMsg _orientation;
+			private PointMsg _position;
+			private QuaternionMsg _orientation;
 
 			public PoseMsg(JSONNode msg) {
                 _position = new PointMsg(msg["position"]);

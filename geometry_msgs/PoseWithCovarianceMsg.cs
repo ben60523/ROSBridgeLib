@@ -10,7 +10,7 @@ using SimpleJSON;
 namespace ROSBridgeLib {
 	namespace geometry_msgs {
 		public class PoseWithCovarianceMsg : ROSBridgeMsg {
-			public PoseMsg _pose;
+			private PoseMsg _pose;
 			private double[] _covariance = new double[36] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
 														   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
 														   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 
@@ -19,10 +19,10 @@ namespace ROSBridgeLib {
 														   0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
 			public PoseWithCovarianceMsg(JSONNode msg) {
-				_pose = new PoseMsg(msg["pose"]["pose"]);
+				_pose = new PoseMsg(msg["pose"]);
 				// Treat covariance
-				for (int i = 0; i < msg["pose"]["covariance"].Count; i++ ) {
-					_covariance[i] = double.Parse(msg["pose"]["covariance"][i]);
+				for (int i = 0; i < msg["covariance"].Count; i++ ) {
+					_covariance[i] = double.Parse(msg["covariance"][i]);
 				}
 			}
 			
